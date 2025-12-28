@@ -8,19 +8,7 @@ import { MemoryGame } from './MemoryGame.js'
 import { Chat } from './Chat.js'
 import { MusicPlayer } from './MusicPlayer.js'
 
-// ... (calculator code)
 
-dock.addApp('Music', '🎵', () => {
-  const music = new MusicPlayer()
-  const win = windowManager.openWindow({
-    title: 'Music Player',
-    content: music.element
-  })
-
-  win.onMinimize = () => {
-    dock.addMinimizedWindow(win, '🎵')
-  }
-})
 
 console.log("OS Initialized")
 

@@ -1,7 +1,8 @@
-
 # Personal Web Desktop (PWD) - Submission
 
-**Presentation Video:** [INSERT YOUR VIDEO URL HERE]
+**Presentation Video:** [src/demo.mp4]
+
+can be found in the root directory of the project
 
 ## Reflection on Features
 

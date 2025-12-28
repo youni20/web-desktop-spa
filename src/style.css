@@ -226,6 +226,11 @@ body {
   transform: rotateY(180deg);
 }
 
+.memory-card:focus {
+  outline: 3px solid #007bff;
+  border-radius: 5px;
+}
+
 .center-card .front {
   background-color: #555;
   /* Distinctive color? */

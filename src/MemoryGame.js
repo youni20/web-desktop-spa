@@ -43,6 +43,15 @@ export class MemoryGame {
             card.appendChild(front)
             card.appendChild(back)
 
+            // Keyboard Accessibility (F3)
+            card.setAttribute('tabindex', '0')
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    this.handleCardClick(card, icon)
+                }
+            })
+
             card.addEventListener('click', () => this.handleCardClick(card, icon))
             this.element.appendChild(card)
             return card

@@ -1,0 +1,41 @@
+/* 1. Force the page to be exactly the size of the window */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* 100% of the viewport height */
+  width: 100vw;  /* 100% of the viewport width */
+  overflow: hidden; /* Stop the desktop itself from scrolling */
+}
+
+/* 2. Set up the vertical layout */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 3. Status bar stays at the top */
+.status-bar {
+  background-color: blue;
+  color: white;
+  padding: 8px 15px;
+  height: 30px; 
+}
+
+/* 4. This is the "Wallpaper" area that fills the screen */
+.content {
+  background-color: grey;
+  flex-grow: 1; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 5. The Dock at the bottom */
+.dock {
+  background-color: black;
+  color: white;
+  padding: 15px;
+  height: 45px; 
+  display: flex;
+  justify-content: center;
+}

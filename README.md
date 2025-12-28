@@ -46,12 +46,14 @@ The **Personal Web Desktop** is a single-page web application (SPA) that simulat
     -   **Emoji Picker**: Integrated emoji support.
     -   **User Switching**: Logout capability to switch users.
 
-### F5: Custom App (Calculator)
+### F5: Custom App (Calculator & Music Player)
 -   **Calculator**: A fully functional calculator with a modern, iOS-inspired design.
+-   **Music Player**: A sleek audio player that plays "Dancing Queen" with a spinning vinyl animation and progress tracking.
 
 ### F7: Enhancements
 -   **Window Centering**: New windows open perfectly centered.
--   **Spotlight Search**: A quick-access search bar in the status bar to find and launch apps.
+-   **Spotlight Search**: A quick-access search bar in the status bar to find and launching apps.
+-   **Window Maximize/Normalize**: Capablity to maximize windows to full screen and restore them to their original size.
 -   **Visual Polish**: High-quality wallpaper, blur effects, and smooth transitions.
 
 ## Code Structure (F8)

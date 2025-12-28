@@ -18,7 +18,9 @@ The Memory Game is a fully functional windowed app. I implemented keyboard acces
 The Chat app connects to the course WebSocket server. I used `localStorage` to persist the username and current channel, so they remain after a refresh. The interface allows sending messages and displays the history. I ensured users can have multiple chat windows open simultaneously, all synchronized to the same session.
 
 ### F5: An Additional Window Application
-I developed a **Calculator** application as my additional app. It features a layout inspired by the iOS calculator, with circular buttons and a clean display. It handles basic arithmetic operations and is fully integrated into the windowing system.
+I developed **two** additional applications:
+1.  **Calculator**: Features a layout inspired by the iOS calculator, with circular buttons and a clean display.
+2.  **Music Player**: An audio player that loads a track from the server. It features a custom "vinyl" animation that spins when music plays and a progress bar that updates in real-time.
 
 ### F6: An Enhanced Chat Application (Optional)
 I implemented four enhancements:
@@ -28,9 +30,10 @@ I implemented four enhancements:
 4.  **Username Switching**: A generic "Logout" button allows users to change their username.
 
 ### F7: Additional Enhancements (Optional)
-I improved the PWD user experience in two key ways:
-1.  **Window Centering**: New windows are calculated to open exactly in the center of the viewport, rather than at a fixed top-left coordinate.
-2.  **Spotlight Search**: I integrated a search bar into the status bar. Users can type to filter applications and launch them immediately, improving accessibility and navigation speed.
+I improved the PWD user experience in three key ways:
+1.  **Window Maximize/Normalize**: I added a "Green" maximize button to the window controls. Clicking it expands the window to fill the available desktop space (respecting the Dock and Status Bar), and clicking again restores it to its previous size and position.
+2.  **Window Centering**: New windows are calculated to open exactly in the center of the viewport.
+3.  **Spotlight Search**: I integrated a persistent search bar in the status bar for quick app launching.
 
 ### F8: Documentation on Code Structure (Optional)
 I have written a detailed explanation of the code structure in the `README.md`, describing the roles of `main.js`, `WindowManager.js`, `Dock.js`, and the individual app classes. I also included a Mermaid class diagram to visualize the relationships between these modules.

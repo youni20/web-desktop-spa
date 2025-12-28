@@ -6,12 +6,28 @@ import { WindowManager } from './WindowManager.js'
 import { Dock } from './Dock.js'
 import { MemoryGame } from './MemoryGame.js'
 import { Chat } from './Chat.js'
-import { Calculator } from './Calculator.js'
+import { MusicPlayer } from './MusicPlayer.js'
+
+// ... (calculator code)
+
+dock.addApp('Music', '🎵', () => {
+  const music = new MusicPlayer()
+  const win = windowManager.openWindow({
+    title: 'Music Player',
+    content: music.element
+  })
+
+  win.onMinimize = () => {
+    dock.addMinimizedWindow(win, '🎵')
+  }
+})
+
+console.log("OS Initialized")
 
 /**
  *
  */
-function updateTime () {
+function updateTime() {
   const date = new Date()
   // Format: "Sat 28 Dec 18:24"
   const dayName = date.toLocaleDateString('en-US', { weekday: 'short' })
@@ -69,6 +85,18 @@ dock.addApp('Calc', '🔢', () => {
   }
 })
 
+dock.addApp('Music', '🎵', () => {
+  const music = new MusicPlayer()
+  const win = windowManager.openWindow({
+    title: 'Music Player',
+    content: music.element
+  })
+
+  win.onMinimize = () => {
+    dock.addMinimizedWindow(win, '🎵')
+  }
+})
+
 console.log('OS Initialized')
 
 /* Search Logic */
@@ -122,7 +150,7 @@ if (searchInput) {
    *
    * @param list
    */
-  function renderResults (list) {
+  function renderResults(list) {
     searchResults.innerHTML = ''
     if (list.length === 0) {
       searchResults.innerHTML = '<div style="padding:10px;color:#666;">No apps found</div>'

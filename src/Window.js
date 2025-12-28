@@ -77,7 +77,7 @@ export class Window {
         // Minimize
         this.minimizeBtn.addEventListener('click', (e) => {
             e.stopPropagation()
-            this.manager.toggleWindow(this)
+            this.minimize() // Force minimize, don't toggle
         })
     }
 
@@ -88,6 +88,7 @@ export class Window {
 
     restore() {
         this.element.style.display = 'flex'
+        this.manager.focusWindow(this) // Ensure focus on restore
         if (this.onRestore) this.onRestore()
     }
 

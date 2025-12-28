@@ -68,6 +68,10 @@ export class Window {
             this.manager.focusWindow(this)
         })
 
+        // Prevent drag start on buttons
+        this.closeBtn.addEventListener('mousedown', (e) => e.stopPropagation())
+        this.minimizeBtn.addEventListener('mousedown', (e) => e.stopPropagation())
+
         // Close
         this.closeBtn.addEventListener('click', (e) => {
             e.stopPropagation() // Prevent focus event if needed
@@ -77,7 +81,7 @@ export class Window {
         // Minimize
         this.minimizeBtn.addEventListener('click', (e) => {
             e.stopPropagation()
-            this.minimize() // Force minimize, don't toggle
+            this.minimize()
         })
     }
 

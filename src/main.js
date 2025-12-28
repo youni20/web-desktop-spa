@@ -10,10 +10,13 @@ import { Calculator } from './Calculator.js'
 
 function updateTime() {
   const date = new Date()
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  const time = date.toLocaleTimeString();
-  const day = date.toLocaleDateString(undefined, options);
-  document.getElementById('time').innerHTML = `${day} <br> ${time}`;
+  // Format: "Sat 28 Dec 18:24"
+  const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+  const dayNum = date.getDate();
+  const month = date.toLocaleDateString('en-US', { month: 'short' });
+  const time = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+
+  document.getElementById('time').innerHTML = `${dayName} ${dayNum} ${month} &nbsp; ${time}`;
 }
 
 setInterval(updateTime, 1000)

@@ -56,4 +56,11 @@ export class MusicPlayer {
         }
         this.isPlaying = !this.isPlaying
     }
+    stop() {
+        this.audio.pause()
+        this.audio.currentTime = 0
+        this.isPlaying = false
+        this.playBtn.textContent = '▶'
+        this.element.querySelector('.vinyl').style.animationPlayState = 'paused'
+    }
 }

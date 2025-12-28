@@ -83,6 +83,10 @@ dock.addApp('Music', '🎵', () => {
   win.onMinimize = () => {
     dock.addMinimizedWindow(win, '🎵')
   }
+
+  win.onClose = () => {
+    music.stop()
+  }
 })
 
 console.log('OS Initialized')
@@ -95,7 +99,8 @@ if (searchInput) {
   const apps = [
     { name: 'Chat', icon: '💬', action: () => document.querySelector('[title="Chat"]').click() },
     { name: 'Memory Game', icon: '🧠', action: () => document.querySelector('[title="Memory"]').click() },
-    { name: 'Calculator', icon: '🔢', action: () => document.querySelector('[title="Calc"]').click() }
+    { name: 'Calculator', icon: '🔢', action: () => document.querySelector('[title="Calc"]').click() },
+    { name: 'Music Player', icon: '🎵', action: () => document.querySelector('[title="Music"]').click() }
   ]
 
   searchInput.addEventListener('input', (e) => {

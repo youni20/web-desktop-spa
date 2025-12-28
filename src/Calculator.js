@@ -2,15 +2,15 @@
  * A simple Calculator application (F5).
  */
 export class Calculator {
-    constructor() {
-        this.element = document.createElement('div')
-        this.element.classList.add('calculator-app')
-        this.displayValue = ''
-        this.initUI()
-    }
+  constructor () {
+    this.element = document.createElement('div')
+    this.element.classList.add('calculator-app')
+    this.displayValue = ''
+    this.initUI()
+  }
 
-    initUI() {
-        this.element.innerHTML = `
+  initUI () {
+    this.element.innerHTML = `
             <div class="calc-display">0</div>
             <div class="calc-buttons">
                 <button class="calc-btn operator">C</button>
@@ -33,29 +33,29 @@ export class Calculator {
             </div>
         `
 
-        this.display = this.element.querySelector('.calc-display')
-        this.element.addEventListener('click', (e) => {
-            if (e.target.matches('button')) {
-                this.handleInput(e.target.textContent)
-            }
-        })
-    }
+    this.display = this.element.querySelector('.calc-display')
+    this.element.addEventListener('click', (e) => {
+      if (e.target.matches('button')) {
+        this.handleInput(e.target.textContent)
+      }
+    })
+  }
 
-    handleInput(value) {
-        if (value === 'C') {
-            this.displayValue = ''
-        } else if (value === '=') {
-            try {
-                // Safe enough for this assignment context
-                // eslint-disable-next-line
+  handleInput (value) {
+    if (value === 'C') {
+      this.displayValue = ''
+    } else if (value === '=') {
+      try {
+        // Safe enough for this assignment context
+        // eslint-disable-next-line
                 this.displayValue = eval(this.displayValue).toString()
-            } catch {
-                this.displayValue = 'Error'
-            }
-        } else {
-            if (this.displayValue === 'Error') this.displayValue = ''
-            this.displayValue += value
-        }
-        this.display.textContent = this.displayValue || '0'
+      } catch {
+        this.displayValue = 'Error'
+      }
+    } else {
+      if (this.displayValue === 'Error') this.displayValue = ''
+      this.displayValue += value
     }
+    this.display.textContent = this.displayValue || '0'
+  }
 }

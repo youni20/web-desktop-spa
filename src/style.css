@@ -435,7 +435,7 @@ body {
 .calc-buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 12px;
+  gap: 12px;
   flex-grow: 1;
 }
 

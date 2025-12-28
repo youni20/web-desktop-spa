@@ -9,8 +9,16 @@ export class WindowManager {
 
     openWindow(config) {
         const { title, content } = config
-        const win = new Window(title, content, this)
+        // Pass empty string initially to Window constructor if it's not a string
+        const win = new Window(title, typeof content === 'string' ? content : '', this)
         this.container.appendChild(win.element)
+
+        // If content is DOM element, append it
+        if (content instanceof HTMLElement) {
+            const contentArea = win.element.querySelector('.window-content')
+            contentArea.appendChild(content)
+        }
+
         this.windows.push(win)
         this.focusWindow(win)
     }

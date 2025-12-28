@@ -1,5 +1,6 @@
 import { WindowManager } from './WindowManager.js'
 import { Dock } from './Dock.js'
+import { MemoryGame } from './MemoryGame.js'
 
 function updateTime() {
   const date = new Date()
@@ -28,9 +29,10 @@ dock.addApp('Chat', '💬', () => {
 })
 
 dock.addApp('Memory', '🧠', () => {
+  const game = new MemoryGame()
   windowManager.openWindow({
     title: 'Memory Game',
-    content: '<div style="padding: 20px;">Memory Game placeholder.</div>'
+    content: game.element
   })
 })
 

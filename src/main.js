@@ -1,6 +1,7 @@
 import { WindowManager } from './WindowManager.js'
 import { Dock } from './Dock.js'
 import { MemoryGame } from './MemoryGame.js'
+import { Chat } from './Chat.js'
 
 function updateTime() {
   const date = new Date()

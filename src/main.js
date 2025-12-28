@@ -8,15 +8,18 @@ import { MemoryGame } from './MemoryGame.js'
 import { Chat } from './Chat.js'
 import { Calculator } from './Calculator.js'
 
-function updateTime() {
+/**
+ *
+ */
+function updateTime () {
   const date = new Date()
   // Format: "Sat 28 Dec 18:24"
-  const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
-  const dayNum = date.getDate();
-  const month = date.toLocaleDateString('en-US', { month: 'short' });
-  const time = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+  const dayName = date.toLocaleDateString('en-US', { weekday: 'short' })
+  const dayNum = date.getDate()
+  const month = date.toLocaleDateString('en-US', { month: 'short' })
+  const time = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
 
-  document.getElementById('time').innerHTML = `${dayName} ${dayNum} ${month} &nbsp; ${time}`;
+  document.getElementById('time').innerHTML = `${dayName} ${dayNum} ${month} &nbsp; ${time}`
 }
 
 setInterval(updateTime, 1000)
@@ -66,7 +69,7 @@ dock.addApp('Calc', '🔢', () => {
   }
 })
 
-console.log("OS Initialized")
+console.log('OS Initialized')
 
 /* Search Logic */
 const searchInput = document.getElementById('status-search')
@@ -115,7 +118,11 @@ if (searchInput) {
     }
   })
 
-  function renderResults(list) {
+  /**
+   *
+   * @param list
+   */
+  function renderResults (list) {
     searchResults.innerHTML = ''
     if (list.length === 0) {
       searchResults.innerHTML = '<div style="padding:10px;color:#666;">No apps found</div>'

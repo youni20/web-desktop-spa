@@ -56,14 +56,18 @@ The **Personal Web Desktop** is a single-page web application (SPA) that simulat
 
 ## Code Structure (F8)
 
-The application is built using a modular architecture with ES6 Classes, ensuring separation of concerns and maintainability.
+The application is architected as a modular Single Page Application (SPA) using modern ES6 JavaScript classes. This approach ensures a clean separation of concerns, making the codebase scalable and maintainable.
 
-*   **`main.js`**: The entry point of the application. It initializes the `WindowManager` and `Dock`, registers the applications (`Chat`, `MemoryGame`, `Calculator`), and handles the global clock and search bar logic.
-*   **`WindowManager.js`**: The core engine for the desktop environment. It manages the list of open windows, handles z-index stacking (bringing focused windows to the front), and coordinates minimize/restore actions.
-*   **`Window.js`**: Represents a single window instance. It encapsulates the DOM structure of a window (header with controls, content area) and handles drag-and-drop logic and button events.
-*   **`Dock.js`**: Manages the bottom bar. It differentiates between "Launchers" (which create new app instances) and "Minimized Windows" (which restore existing ones).
-*   **`Chat.js`, `MemoryGame.js`, `Calculator.js`**: These are the application classes. Each class encapsulates its own state, UI rendering, and event handling, exposing a root `element` that the `Window` class appends to its content area.
-*   **`style.css`**: A comprehensive stylesheet handling the "Glassmorphism" theme, CSS variables for colors, and responsive layout rules.
+*   **`main.js`**: This is the application's entry point. It orchestrates the initialization of the primary components, specifically the `WindowManager` and the `Dock`. It also registers all available applications (Chat, MemoryGame, Calculator) and manages global UI elements like the clock and the status bar search functionality.
+*   **`WindowManager.js`**: Acting as the core engine of the desktop environment, this class manages the lifecycle of all window instances. It handles complex logic for z-index stacking to ensure the active window is always in the foreground. It also coordinates window focus events and handles the logic for minimizing and restoring windows to and from the dock.
+*   **`Window.js`**: This class encapsulates the DOM structure and behavior of a single window. It creates the standard window chrome (header, control buttons, content area) and implements drag-and-drop functionality using mouse events. It also handles the specific behaviors for closing and minimizing itself, communicating back to the WindowManager when necessary.
+*   **`Dock.js`**: This component manages the application dock at the bottom of the screen. It distinguishes between "Launchers" (static icons that open new app instances) and "Running/Minimized" apps (dynamic icons or visuals representing active state). It provides visual feedback on hover and manages the event listeners for launching or restoring applications.
+*   **`Chat.js`**: A self-contained module for the Chat application. It manages the WebSocket connection to the server, handles the local state for messages and channels, and renders the chat UI. It implements `localStorage` for persistence and provides features like username switching and message history caching.
+*   **`MemoryGame.js`**: Encapsulates the logic for the Memory Match game. It manages the grid state, card flipping mechanics, and win conditions. It also implements keyboard accessibility features (tab navigation and key press events) to verify specific assignment requirements.
+*   **`Calculator.js`**: A standalone module for the Calculator app. It handles the display and button grid generation, as well as the calculation logic. It is designed to be completely independent of the rest of the system, demonstrating the flexibility of the windowing architecture.
+*   **`style.css`**: A comprehensive stylesheet that defines the visual theme. It uses CSS variables for consistent theming and implements the "Glassmorphism" aesthetic through backdrop-filters and translucent backgrounds.
+
+All modules interact through the central `WindowManager`, which acts as the mediator between the individual apps and the desktop environment.
 
 ### Class Relationship Diagram
 

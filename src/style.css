@@ -38,10 +38,46 @@ body {
 .dock {
   background-color: black;
   color: white;
-  padding: 15px;
-  height: 40px;
+  padding: 10px 15px;
+  height: 50px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.dock-launchers,
+.dock-running {
+  display: flex;
+  align-items: center;
+}
+
+.dock-divider {
+  width: 2px;
+  height: 40px;
+  background-color: #555;
+  margin: 0 10px;
+  border-radius: 2px;
+}
+
+.minimized-icon {
+  opacity: 0.8;
+  filter: brightness(0.8);
+}
+
+.dock-icon.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  width: 5px;
+  height: 5px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.dock-icon.minimized {
+  opacity: 0.5;
+  filter: grayscale(100%);
 }
 
 #time {
@@ -85,6 +121,11 @@ body {
   border-bottom: 1px solid #ccc;
 }
 
+.window-controls {
+  display: flex;
+  gap: 5px;
+}
+
 .window-header:active {
   cursor: grabbing;
 }
@@ -94,20 +135,33 @@ body {
   font-size: 14px;
 }
 
-.close-btn {
-  background: #ff5f56;
+.close-btn,
+.minimize-btn {
   border: none;
   border-radius: 50%;
   width: 12px;
   height: 12px;
   cursor: pointer;
   color: transparent;
-  /* Hide X text usually, simplistic circle look */
+  /* Hide text */
   overflow: hidden;
+  padding: 0;
+}
+
+.close-btn {
+  background: #ff5f56;
 }
 
 .close-btn:hover {
   background: #ff3b30;
+}
+
+.minimize-btn {
+  background: #ffbd2e;
+}
+
+.minimize-btn:hover {
+  background: #ffad1d;
 }
 
 .window-content {
@@ -125,7 +179,7 @@ body {
   height: 100%;
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   box-sizing: border-box;
 }
@@ -202,4 +256,58 @@ body {
 
 .shake {
   animation: shake 0.5s;
+}
+
+/* Win Overlay */
+.win-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  animation: fadeIn 0.3s;
+  z-index: 10;
+}
+
+.win-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.win-content h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.play-again-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.play-again-btn:hover {
+  background: #45a049;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

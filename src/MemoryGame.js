@@ -24,8 +24,7 @@ export class MemoryGame {
         // Shuffle
         deck.sort(() => 0.5 - Math.random())
 
-        // Insert Center card at index 4 (middle of 0-8)
-        deck.splice(4, 0, '🔄')
+        // No center card anymore
 
         this.cards = deck.map((icon, index) => {
             const card = document.createElement('div')
@@ -35,7 +34,7 @@ export class MemoryGame {
 
             const front = document.createElement('div')
             front.classList.add('front')
-            front.textContent = '❓' // or blank/pattern
+            front.textContent = '❓'
 
             const back = document.createElement('div')
             back.classList.add('back')
@@ -43,10 +42,6 @@ export class MemoryGame {
 
             card.appendChild(front)
             card.appendChild(back)
-
-            if (icon === '🔄') {
-                card.classList.add('center-card')
-            }
 
             card.addEventListener('click', () => this.handleCardClick(card, icon))
             this.element.appendChild(card)
@@ -58,12 +53,6 @@ export class MemoryGame {
         if (this.isLocked) return
         if (card.classList.contains('flipped')) return
         if (card.classList.contains('matched')) return
-
-        // Center card resets game
-        if (icon === '🔄') {
-            this.restartAnimation()
-            return
-        }
 
         this.flipCard(card)
         this.flippedCards.push({ card, icon })
@@ -94,7 +83,7 @@ export class MemoryGame {
             this.isLocked = false
 
             if (this.matchedCount === 4) {
-                setTimeout(() => alert('You Won!'), 500)
+                setTimeout(() => this.showWinOverlay(), 500)
             }
         } else {
             // No Match
@@ -105,6 +94,23 @@ export class MemoryGame {
                 this.isLocked = false
             }, 1000)
         }
+    }
+
+    showWinOverlay() {
+        const overlay = document.createElement('div')
+        overlay.classList.add('win-overlay')
+        overlay.innerHTML = `
+        <div class="win-content">
+            <h2>You Won! 🎉</h2>
+            <button class="play-again-btn">Play Again</button>
+        </div>
+      `
+
+        overlay.querySelector('.play-again-btn').addEventListener('click', () => {
+            this.initGame() // Resets everything including clearing element content
+        })
+
+        this.element.appendChild(overlay)
     }
 
     restartAnimation() {

@@ -21,6 +21,7 @@ export class WindowManager {
 
         this.windows.push(win)
         this.focusWindow(win)
+        return win
     }
 
     focusWindow(activeWindow) {
@@ -33,5 +34,25 @@ export class WindowManager {
         this.windows.forEach((win, index) => {
             win.element.style.zIndex = this.baseZIndex + index
         })
+    }
+
+    toggleWindow(win) {
+        if (win.element.style.display === 'none') {
+            win.restore()
+            this.focusWindow(win)
+        } else {
+            // If it's the active window, minimize it.
+            // If it's NOT the active window (but visible), focus it.
+            // Simplified check: is it the last one in the list? (Assume list order = z-index order)
+            // But focusWindow moves to end. So yes.
+
+            const isActive = this.windows[this.windows.length - 1] === win;
+
+            if (isActive) {
+                win.minimize()
+            } else {
+                this.focusWindow(win)
+            }
+        }
     }
 }

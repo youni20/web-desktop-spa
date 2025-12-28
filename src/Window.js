@@ -9,7 +9,10 @@ export class Window {
         this.element.innerHTML = `
       <div class="window-header">
         <span class="window-title">${title}</span>
-        <button class="close-btn">X</button>
+        <div class="window-controls">
+            <button class="minimize-btn">_</button>
+            <button class="close-btn">X</button>
+        </div>
       </div>
       <div class="window-content">
         ${content}
@@ -18,6 +21,7 @@ export class Window {
 
         this.header = this.element.querySelector('.window-header')
         this.closeBtn = this.element.querySelector('.close-btn')
+        this.minimizeBtn = this.element.querySelector('.minimize-btn')
 
         this.setupEvents()
     }
@@ -57,12 +61,29 @@ export class Window {
 
         // Close
         this.closeBtn.addEventListener('click', (e) => {
-            e.stopPropagation() // Prevent focus event if needed, though focus before close isn't bad
+            e.stopPropagation() // Prevent focus event if needed
             this.close()
         })
+
+        // Minimize
+        this.minimizeBtn.addEventListener('click', (e) => {
+            e.stopPropagation()
+            this.manager.toggleWindow(this)
+        })
+    }
+
+    minimize() {
+        this.element.style.display = 'none'
+        if (this.onMinimize) this.onMinimize()
+    }
+
+    restore() {
+        this.element.style.display = 'flex'
+        if (this.onRestore) this.onRestore()
     }
 
     close() {
         this.element.remove()
+        if (this.onClose) this.onClose()
     }
 }

@@ -21,19 +21,28 @@ const windowManager = new WindowManager(content)
 const dock = new Dock(windowManager)
 
 // Add Placeholder Apps
+// Add Placeholder Apps
 dock.addApp('Chat', '💬', () => {
-  windowManager.openWindow({
+  const win = windowManager.openWindow({
     title: 'Chat',
     content: '<div style="padding: 20px;">This is the chat application placeholder.</div>'
   })
+
+  win.onMinimize = () => {
+    dock.addMinimizedWindow(win, '💬')
+  }
 })
 
 dock.addApp('Memory', '🧠', () => {
   const game = new MemoryGame()
-  windowManager.openWindow({
+  const win = windowManager.openWindow({
     title: 'Memory Game',
     content: game.element
   })
+
+  win.onMinimize = () => {
+    dock.addMinimizedWindow(win, '🧠')
+  }
 })
 
 console.log("OS Initialized")

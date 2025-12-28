@@ -1,3 +1,7 @@
+/**
+ * Main entry point for the Personal Web Desktop (PWD).
+ * Initializes WindowManager, Dock, and registers applications.
+ */
 import { WindowManager } from './WindowManager.js'
 import { Dock } from './Dock.js'
 import { MemoryGame } from './MemoryGame.js'

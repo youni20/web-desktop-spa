@@ -1,12 +1,26 @@
 import { Window } from './Window.js'
 
+/**
+ * Manages the creation and state of window instances.
+ * Handles z-indexing and focus management.
+ */
 export class WindowManager {
+    /**
+     * @param {HTMLElement} container - The DOM element to contain windows
+     */
     constructor(container) {
         this.container = container
         this.windows = []
         this.baseZIndex = 100
     }
 
+    /**
+     * Opens a new window with the specified configuration.
+     * @param {Object} config - Window configuration
+     * @param {string} config.title - Title of the window
+     * @param {string|HTMLElement} config.content - Content to display
+     * @returns {Window} The created window instance
+     */
     openWindow(config) {
         const { title, content } = config
         // Pass empty string initially to Window constructor if it's not a string

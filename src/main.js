@@ -67,3 +67,61 @@ dock.addApp('Calc', '🔢', () => {
 })
 
 console.log("OS Initialized")
+
+/* Spotlight Search Logic */
+const searchIcon = document.getElementById('search-icon')
+const spotlight = document.getElementById('spotlight')
+const spotlightInput = document.getElementById('spotlight-input')
+const spotlightResults = document.getElementById('spotlight-results')
+
+const apps = [
+  { name: 'Chat', icon: '💬', action: () => document.querySelector('[title="Chat"]').click() },
+  { name: 'Memory Game', icon: '🧠', action: () => document.querySelector('[title="Memory"]').click() },
+  { name: 'Calculator', icon: '🔢', action: () => document.querySelector('[title="Calc"]').click() }
+]
+
+searchIcon.addEventListener('click', () => {
+  spotlight.classList.toggle('hidden')
+  if (!spotlight.classList.contains('hidden')) {
+    spotlightInput.value = ''
+    renderResults(apps)
+    spotlightInput.focus()
+  }
+})
+
+spotlightInput.addEventListener('input', (e) => {
+  const term = e.target.value.toLowerCase()
+  const filtered = apps.filter(app => app.name.toLowerCase().includes(term))
+  renderResults(filtered)
+})
+
+spotlightInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    spotlight.classList.add('hidden')
+  }
+  if (e.key === 'Enter') {
+    const first = spotlightResults.querySelector('.spotlight-result')
+    if (first) first.click()
+  }
+})
+
+function renderResults(list) {
+  spotlightResults.innerHTML = ''
+  list.forEach(app => {
+    const div = document.createElement('div')
+    div.classList.add('spotlight-result')
+    div.innerHTML = `<span>${app.icon}</span> <span>${app.name}</span>`
+    div.addEventListener('click', () => {
+      app.action()
+      spotlight.classList.add('hidden')
+    })
+    spotlightResults.appendChild(div)
+  })
+}
+
+// Close spotlight when clicking outside
+document.addEventListener('click', (e) => {
+  if (!spotlight.contains(e.target) && e.target !== searchIcon) {
+    spotlight.classList.add('hidden')
+  }
+})

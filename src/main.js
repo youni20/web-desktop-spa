@@ -2,6 +2,7 @@ import { WindowManager } from './WindowManager.js'
 import { Dock } from './Dock.js'
 import { MemoryGame } from './MemoryGame.js'
 import { Chat } from './Chat.js'
+import { Calculator } from './Calculator.js'
 
 function updateTime() {
   const date = new Date()
@@ -43,6 +44,18 @@ dock.addApp('Memory', '🧠', () => {
 
   win.onMinimize = () => {
     dock.addMinimizedWindow(win, '🧠')
+  }
+})
+
+dock.addApp('Calc', '🔢', () => {
+  const calc = new Calculator()
+  const win = windowManager.openWindow({
+    title: 'Calculator',
+    content: calc.element
+  })
+
+  win.onMinimize = () => {
+    dock.addMinimizedWindow(win, '🔢')
   }
 })
 

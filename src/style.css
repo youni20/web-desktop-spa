@@ -39,3 +39,16 @@ body {
   display: flex;
   justify-content: center;
 }
+
+#time {
+  color: white;       /* Contrast against blue background */
+  font-weight: bold;
+  margin-left: auto;  /* Pushes the clock to the right side of the bar */
+}
+
+/* Ensure the status bar can show two items side-by-side */
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

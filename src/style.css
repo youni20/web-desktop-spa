@@ -1,10 +1,14 @@
 /* 1. Force the page to be exactly the size of the window */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-  height: 100vh; /* 100% of the viewport height */
-  width: 100vw;  /* 100% of the viewport width */
-  overflow: hidden; /* Stop the desktop itself from scrolling */
+  height: 100vh;
+  /* 100% of the viewport height */
+  width: 100vw;
+  /* 100% of the viewport width */
+  overflow: hidden;
+  /* Stop the desktop itself from scrolling */
 }
 
 /* 2. Set up the vertical layout */
@@ -18,13 +22,13 @@ body {
   background-color: blue;
   color: white;
   padding: 8px 15px;
-  height: 30px; 
+  height: 30px;
 }
 
 /* 4. This is the "Wallpaper" area that fills the screen */
 .content {
   background-color: grey;
-  flex-grow: 1; 
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,15 +39,17 @@ body {
   background-color: black;
   color: white;
   padding: 15px;
-  height: 40px; 
+  height: 40px;
   display: flex;
   justify-content: center;
 }
 
 #time {
-  color: white;       /* Contrast against blue background */
+  color: white;
+  /* Contrast against blue background */
   font-weight: bold;
-  margin-left: auto;  /* Pushes the clock to the right side of the bar */
+  margin-left: auto;
+  /* Pushes the clock to the right side of the bar */
 }
 
 /* Ensure the status bar can show two items side-by-side */
@@ -51,4 +57,64 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+/* Window Styles */
+.window {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Ensure it's clickable */
+  user-select: none;
+}
+
+.window-header {
+  background-color: #e0e0e0;
+  padding: 5px 10px;
+  cursor: grab;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.window-header:active {
+  cursor: grabbing;
+}
+
+.window-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.close-btn {
+  background: #ff5f56;
+  border: none;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+  color: transparent;
+  /* Hide X text usually, simplistic circle look */
+  overflow: hidden;
+}
+
+.close-btn:hover {
+  background: #ff3b30;
+}
+
+.window-content {
+  padding: 10px;
+  flex-grow: 1;
+  background-color: white;
+  overflow: auto;
+  cursor: auto;
+  user-select: text;
 }

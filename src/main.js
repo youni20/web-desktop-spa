@@ -21,12 +21,12 @@ const windowManager = new WindowManager(content)
 // Initialize Dock
 const dock = new Dock(windowManager)
 
-// Add Placeholder Apps
-// Add Placeholder Apps
+// Add Apps
 dock.addApp('Chat', '💬', () => {
+  const chat = new Chat()
   const win = windowManager.openWindow({
     title: 'Chat',
-    content: '<div style="padding: 20px;">This is the chat application placeholder.</div>'
+    content: chat.element
   })
 
   win.onMinimize = () => {

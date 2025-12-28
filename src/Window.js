@@ -3,8 +3,9 @@ export class Window {
         this.manager = manager
         this.element = document.createElement('div')
         this.element.classList.add('window')
-        this.element.style.top = '50px'
-        this.element.style.left = '50px'
+        this.element.style.top = '50%'
+        this.element.style.left = '50%'
+        this.element.style.transform = 'translate(-50%, -50%)'
 
         this.element.innerHTML = `
       <div class="window-header">
@@ -32,6 +33,14 @@ export class Window {
         let startX, startY, initialLeft, initialTop
 
         this.header.addEventListener('mousedown', (e) => {
+            // Handle centering removal on first drag
+            if (this.element.style.transform && this.element.style.transform.includes('translate')) {
+                const rect = this.element.getBoundingClientRect()
+                this.element.style.transform = 'none'
+                this.element.style.left = rect.left + 'px'
+                this.element.style.top = rect.top + 'px'
+            }
+
             isDragging = true
             startX = e.clientX
             startY = e.clientY

@@ -14,15 +14,16 @@
 <body>
 
   <div class="status-bar">
-    <span class="left-controls">
-      <span class="apple-logo"></span>
-      <span class="app-name">PWD</span>
-    </span>
+    <div class="left-controls">
+      <input type="text" id="status-search" placeholder="Search apps..." autocomplete="off">
+    </div>
     <div class="right-controls">
-      <span id="search-icon">🔍</span>
       <span id="time"></span>
     </div>
   </div>
+
+  <!-- Search Results Dropdown -->
+  <div id="search-results" class="hidden"></div>
 
   <div class="content">
     <!-- Windows will be appended here -->

@@ -68,60 +68,70 @@ dock.addApp('Calc', '🔢', () => {
 
 console.log("OS Initialized")
 
-/* Spotlight Search Logic */
-const searchIcon = document.getElementById('search-icon')
-const spotlight = document.getElementById('spotlight')
-const spotlightInput = document.getElementById('spotlight-input')
-const spotlightResults = document.getElementById('spotlight-results')
+/* Search Logic */
+const searchInput = document.getElementById('status-search')
+const searchResults = document.getElementById('search-results')
 
-const apps = [
-  { name: 'Chat', icon: '💬', action: () => document.querySelector('[title="Chat"]').click() },
-  { name: 'Memory Game', icon: '🧠', action: () => document.querySelector('[title="Memory"]').click() },
-  { name: 'Calculator', icon: '🔢', action: () => document.querySelector('[title="Calc"]').click() }
-]
+if (searchInput) {
+  const apps = [
+    { name: 'Chat', icon: '💬', action: () => document.querySelector('[title="Chat"]').click() },
+    { name: 'Memory Game', icon: '🧠', action: () => document.querySelector('[title="Memory"]').click() },
+    { name: 'Calculator', icon: '🔢', action: () => document.querySelector('[title="Calc"]').click() }
+  ]
 
-searchIcon.addEventListener('click', () => {
-  spotlight.classList.toggle('hidden')
-  if (!spotlight.classList.contains('hidden')) {
-    spotlightInput.value = ''
-    renderResults(apps)
-    spotlightInput.focus()
-  }
-})
+  searchInput.addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase().trim()
+    if (!term) {
+      searchResults.classList.add('hidden')
+      return
+    }
 
-spotlightInput.addEventListener('input', (e) => {
-  const term = e.target.value.toLowerCase()
-  const filtered = apps.filter(app => app.name.toLowerCase().includes(term))
-  renderResults(filtered)
-})
-
-spotlightInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    spotlight.classList.add('hidden')
-  }
-  if (e.key === 'Enter') {
-    const first = spotlightResults.querySelector('.spotlight-result')
-    if (first) first.click()
-  }
-})
-
-function renderResults(list) {
-  spotlightResults.innerHTML = ''
-  list.forEach(app => {
-    const div = document.createElement('div')
-    div.classList.add('spotlight-result')
-    div.innerHTML = `<span>${app.icon}</span> <span>${app.name}</span>`
-    div.addEventListener('click', () => {
-      app.action()
-      spotlight.classList.add('hidden')
-    })
-    spotlightResults.appendChild(div)
+    const filtered = apps.filter(app => app.name.toLowerCase().includes(term))
+    renderResults(filtered)
   })
-}
 
-// Close spotlight when clicking outside
-document.addEventListener('click', (e) => {
-  if (!spotlight.contains(e.target) && e.target !== searchIcon) {
-    spotlight.classList.add('hidden')
+  searchInput.addEventListener('focus', () => {
+    if (searchInput.value.trim()) {
+      searchResults.classList.remove('hidden')
+    }
+  })
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+      searchResults.classList.add('hidden')
+    }
+  })
+
+  // Enter key support
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const first = searchResults.querySelector('.search-result-item')
+      if (first) first.click()
+    }
+    if (e.key === 'Escape') {
+      searchResults.classList.add('hidden')
+      searchInput.blur()
+    }
+  })
+
+  function renderResults(list) {
+    searchResults.innerHTML = ''
+    if (list.length === 0) {
+      searchResults.innerHTML = '<div style="padding:10px;color:#666;">No apps found</div>'
+    } else {
+      list.forEach(app => {
+        const div = document.createElement('div')
+        div.classList.add('search-result-item')
+        div.innerHTML = `<span>${app.icon}</span> <span>${app.name}</span>`
+        div.addEventListener('click', () => {
+          app.action()
+          searchResults.classList.add('hidden')
+          searchInput.value = ''
+        })
+        searchResults.appendChild(div)
+      })
+    }
+    searchResults.classList.remove('hidden')
   }
-})
+}
